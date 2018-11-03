@@ -1,0 +1,58 @@
+\documentclass[10pt, letterpaper, twoside, draftclsnofoot, onecolumn. notitlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
+\rmfamily
+
+\title{Computer Vision Grass Seed Sorter Tech Review}
+\author{Kevin Deming
+CS 461 Fall Term}
+%Senior Design Fall Term
+
+
+\begin{document}
+	
+	\begin{titlepage}
+		\maketitle
+		\begin{abstract}
+			\textit{Abstract} - The tech review showcases some of the technology that is being considered for the grass seed sorter project and expands on the decisions being made. There are three parts of the project explained, first is the camera used, second is the operating system on the computer, and last is the unit used to send the signals to the sorting mechanism. In oder to achieve the goal of accuracy and speed that is needed for sorting such small seeds, the power and speed of each part is considered along with their costs.
+		\end{abstract}
+	\end{titlepage}
+\section{Introduction}
+\quad Our project, the Grass seed sorter, requires many parts to work together in order to identify non grass seeds and sort them out. I will look at three separate parts of this project and give suggestions as to the technology used in each part. The three parts I will talk about are the Camera, operating system, and the device used to output a signal.
+
+
+\section{The Camera}
+\quad
+The camera we use for this project needs to fulfill the following requirements, high resolution, clear picture, allows for rapid image taking. Price and ease of use are secondary goals for each camera since they don't affect other aspects of the project.
+Option 1.1 offers a high resolution at 30 frames per second, as well as little software attached. This allows for the detail we need to identify each seed and easily use another program to capture images. The reason this is specifically a great option is that the cost of this camera is between $50-$80, the camera comes with a moveable lens(can look around) which makes it easy to set up, and it uses usb for easy computer connection. Since we have one that we can use for some of our development we can test it out and see if the resolution is good enough and be able to test out the software with this camera. 
+Option 1.2 Is a “fish eye” camera board that is able to give images up to 120 fps. This small camera has the ability to fit into tight spaces and be adaptable due to its small size. The camera is able to run at 30-120 fps allowing for clear and fast imaging. It is connected to the computer using usb 2.0, which is ideal for easy setup of the camera. The camera is able to work with a multitude of operating systems including the 3 main operating systems we would be using. Price wise, the Kayeton is very cheap considering the quality. The price for this camera would be \$42. The downsides are that we don’t know if the software they provide will interfere with the software we want to use and we would need a mount to have the camera held up.
+Option 1.3 ,The logitech BRIO, offers 4k resolution as well as lower resolutions at high frame rates. Since we are looking at very small seeds, having extremely high resolution is helpful for correctly identifying each seed. Since it also is able to do lower resolutions at a high rate, it makes this option very adaptable depending on what we need it to do. Although it specifications are high, the cost for the BRIO are in the \$200 range which is much cheaper than most 4k cameras. This option gives us a lot of flexibility in terms of fps and image quality as well as having usb connection for easy setup to the computer. On top of its hardware being solid, the BRIO comes with a 5 times zoom and light correction, allowing for closer and clearer imaging than other cameras. \newline
+1.1 Logitech C920 Pro webcam. \newline
+1.2 KAYETON Full HD 1080P 120fps 60fps 30fps UVC Android Linux Windows Mac wide angle usb web webcam fisheye camera module board \newline
+1.3 Logitech BRIO \newline
+
+\section{Operating System}
+\quad 
+The operating system we use will determine our accessibility to certain softwares as well as drivers. The main things we are looking for in each operating system is accessibility/compatibility, size(if we use a computer with small memory size), long term effectiveness/lack of possible errors. Secondary are cost ease of use. 
+Option 2.1 The Windows operating system has the most flexibility out of most operating systems since there is a large amount of drivers/software available allowing for ease of compatibility between each part. Having high compatibility helps in finding more efficient parts for other pieces of the project and not limiting our options. Windows is already installed on the labs laptop as well as many of our teams computers. This makes it the most comfortable operating software to use as well as free since it doesn’t need to be bought. The downsides to using windows is that the size and background processes of the operating system. The size makes it hard to use with smaller devices such as a raspberry pie or laptop with small memory. The background processes can also cause some possible errors, since a process could ask for permission in the middle of running the program, thus causing it to interrupt the process and cause errors to occur. 
+Option 2.2 Apples OSX is a very optimized and efficiently run operating system. Its strengths lie in being usually only run on apple devices allowing them to optimize their O.S. to run with certain hardware. This makes Apple devices very efficient with image and video processing since the graphics processing unit is used efficiently with the operating system. The software that is available for OSX tends to be some of the better image or video processing and editing so there may be some powerful software that could enhance our system. The downsides to using OSX is that there is a limit to the software and drivers we can use, thus limiting our options for other parts of the project.
+Option 2.3 Linux is a great operating system, however its strengths lie in its ease of control and size. If our team were to use a smaller computer to connect and run our project, like a raspberry pi, linux would be very optimal in its small memory size, as well as being able to work with many efficient and powerful softwares. Linux, due to its smaller size, doesn’t have all the backend of Windows, however this makes it very fast and efficient due to less background processes. Having better processing speed is very important when it comes to quickly identifying and catching off seeds and since extra security is not as important linux is very effective. The downside to using Linux is that there are a lot of possible compatibility issues as well as not being able to run certain software. This would limit our software choices and could end up making us do a lot of work just to get it running. \newline
+2.1 Windows OS \newline
+2.2 MAC OSX \newline
+2.3 Linux Ubuntu \newline
+
+\section{Output unit}
+\quad 
+The output device we use needs to be able to take a signal from the main computer and send it to the sorting device. The most important parts of these devices are software available to use(to reduce us coding for each of them), the ability to send output signals in many forms(coordinates, yes or no, a data packet), ability to receive communication from the computer. Secondary is cost and ease of use(current availability). 
+Option 3.1 The Arduino board is able to take in data from the computer and send signals accordingly using free online software. The ability to communicate with the computer would allow us to send simple or complex signals in order to time our signals or send lots of data to the sorting device very quickly. The Arduino board is a cheap board running at around \$35 and is easy to setup and attach modules to. This makes it nice for attaching a display board to show the current state of the system so that errors or malfunctions can be caught. Although this board is easy and effective, it is large and the wires connecting to it can become a hassle. This board is great for controlling larger system setups and input and output data sending as well as being very cost effective.
+Option 3.2 The atmega128 is able to take in inputs and output signals and is fairly easy to setup and program. This board has a built in LCD screen that we can use to display the status of the system and use for showing when a bad seed was detected. The atmega has multiple buttons that can be used to help with testing the system as well as debugging. The atmega128 would be programed by hand costing coding time, however the actual cost of the board is relatively cheap and we have a board that we could use even if just for testing purposes. Lastly the Atmega would be able to take input from the computer and send it through its inputs and outputs. For testing the atmega128 is the easiest to work with.
+Option 3.3   The velocio Ace programmable logic control unit is a cheap and simple I/O control unit. This will allow for relatively simple I/O interactions as well as allowing other operations to go on. The advantage that the Ace brings is that it is covered with a case and it is 2.5 inches length and width making it very compacted. This makes it nice for testing as there is less worry about damaging or touching individual circuit and causing it to short circuit. Its size makes it easy to keep the system small and not have large boards in the way. This is a great controller to use for an end version of our project. \newline
+3.1 Arduino \newline
+3.2 Atmega128 \newline
+3.3 velocio ACE PCL \newline
+
+\section{Conclusion}
+\quad The three pieces of our project above have many options that each have unique benefits to our project. For the camera selection the logitech c920 pro has the best HD quality for the price and we have one to test with already making it the best option unless we find we need higher quality or better frames per second. For the operating system, windows will be fine to use due to its high level of compatibility, however in the case we use a raspberry pi over a laptop or desktop computer Linux would be the most effective due to the OS's small size. Lastly for the output device the velocio programmable logic controller ends up being very easy to use and setup as well as being decently cheap. Its size is very nice for keeping the system compact and its processing power would be enough for what we need it for.
+
+	
+\end{document}
