@@ -1,0 +1,107 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{setspace}
+
+\usepackage{geometry}
+\geometry{textheight=9.5in, textwidth=7in}
+
+% 1. Fill in these details
+\def \CapstoneTeamName{		The Seed Team}
+\def \CapstoneTeamNumber{		32}
+\def \GroupMemberOne{			Bharath Padmaraju}
+\def \GroupMemberTwo{			Kevin Deming}
+\def \GroupMemberThree{			Haoxuan Zhan}
+\def \GroupMemberFour{			Cong Yang}
+\def \GroupMemberFive{			Christopher Wohlwend}
+\def \CapstoneProjectName{		Pure Grass Seed Sorter}
+\def \CapstoneSponsorCompany{	Oregon State University Seed Lab}
+\def \CapstoneSponsorPerson{		Dan Curry}
+
+% 2. Uncomment the appropriate line below so that the document type works
+\def \DocType{		Problem Statement
+				%Requirements Document
+				%Technology Review
+				%Design Document
+				%Progress Report
+				}
+			
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+%\renewcommand{\NameSigPair}[1]{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+    	\includegraphics[height=4cm]{coe_v_spot1}
+        \hfill 
+        % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
+        %\includegraphics[height=4cm]{CompanyLogo}   
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            % 5. comment out the line below this one if you do not wish to name your team
+            \CapstoneTeamName\par 
+            \vspace{5pt}
+            {\Large
+                \NameSigPair{\GroupMemberOne}\par
+                \NameSigPair{\GroupMemberTwo}\par
+                \NameSigPair{\GroupMemberThree}\par
+                \NameSigPair{\GroupMemberFour}\par
+                \NameSigPair{\GroupMemberFive}\par
+            }
+            \vspace{20pt}
+        }
+        \begin{abstract}
+        % 6. Fill in your abstract    
+        	The primary objective of the project is to automate grass seed sorting. The members of the group will be building software to be able to discriminate between pure grass seeds from all other plant seeds including but not limited to weeds, and crop seeds. The method we will utilize will be a combination of implementing computer vision and deep learning algorithms to accurately identify off type seeds under a high definition camera. This will vastly reduce the stress and workload imposed upon seed analysts, and likely speed up the sorting process. Not only does this project offer a opportunity to improve seed research, but also creates possibilities in other fields where our technology can automate menial and repetitive tasks.
+        \end{abstract}     
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+
+% 8. now you write!
+\section{Motivation}
+Oregon State University has seed analysts that meticulously hand sort seeds. Analysts sometimes may have to sort up to 10 samples in a day, each sample contains 25000 seeds. Sorting the seeds can result in "eyestrain, headaches, and backaches", furthermore the tiring work is incredibly monotonous. Moreover, given the nature of the sorting, false positives are a common occurrence the longer the analyst works on sorting. Currently there exists automating machines in industry that can sort other seeds and cereals, however a similar machine doesn't exist for grass seeds because the market isn't there for it. Not only does such a machine improve the ability for labs to test seeds and accurate data, but it also assists farmers and seed producing industries in their methods and production. In the state of Oregon, where agriculture is a large industry, improvements to seed research and methods would be extremely impactful to the entire state and its economy. 
+
+\section{Methods and Solutions}
+
+\subsection{Physical Apparatus}
+
+Although our work will not include the actual machine itself, just the software, it is worth noting how the actual machine itself will operate. Ideally, the machine will work with a conveyor belt, a high definition camera and an LED light. The seeds will be moving along a conveyor belt while a camera takes pictures of each one, Using the picture taken, an algorithm will signal if the seed is a grass seed by turning on the LED light, it will remain a separate color if anything else. 
+
+\subsection{Algorithms and Data}
+
+The project at its core is a software problem, the team's ultimate goal is to handle the classification of the seeds and leave the machinery to another team. It being a software project means we need to establish what kind of tools and structure are needed to successfully complete the project. We will be gathering training data by taking pictures of groups of seeds on a conveyor belt using a Logitech webcam. Pre-processing the images to workable and labeled dataset will be up to a pre-existing library, most likely OpenCV the most popular open source computer vision library. Once pre-processing is complete our job will be to then train the existing labeled dataset using a deep learning algorithm. The deep learning algorithm most suited to this task would a CNN (Convolutional Neural Network). A CNN is a type of deep learning architecture that uses a feed forward network of multi-layered perceptrons, the connectivity of which largely resembles that of a visual cortex in animals. Furthermore, the learning applies to the filters that the network is able to generate and apply to optimize classification of the images. Most likely we will build the architecture using Keras, which is a wrapper library that encompasses the ever popular TensorFlow library developed by Google. The library graphs tensor operations. Keras is highly modular and will be used to simplify the code. Moreover pre-existing neural network architectures already exist and are built into the Keras framework, networks such as VGG, ResNet, Inception, and DenseNet. Using transfer learning we can build on top of these pre-existing models to fit with our dataset and specific needs. One thing to note is the immense computing complexity of training. Traditional computers and CPU's might take days or even weeks to train a neural network with such an immense dataset. The more efficient and testable method would be to train on a GPU (graphics processing unit). Moreover, a high powered GPU such as an NVIDIA 1080ti would be more that capable of handling the training size. A GPU trains faster because at its core deep learning requires a lot of matrix multiplication (tensor operations), which stems from the forward, and backward passes an architecture requires.
+
+\section{Performance Metrics}
+
+Our performance metrics will indicate whether our methods are effective in correctly classifying the grass seeds from various seeds. As per the client there will be two categories from which to classify, pure seeds which are 99.9\% purity and other off-type seeds. Off-type seeds can be classified under three categories: easy medium and difficult. Easy seeds differ clearly in size, shape and color. We need to detect 98\% of these seeds. Medium seeds differ by size shape or colour, or are tiny enough to be hidden. We need to detect 88\% of these seeds. Difficult seeds differ only slightly by one or two criteria. We need to detect 62\% of these seeds.
+Furthermore, 10\% of the classifications are permitted to be false positives, meaning our group will need to achieve more than 90\% accuracy from out algorithms. In future work on the physical apparatus, a goal of classifying 25,000 seeds in 30 minutes will need to be achieved. In terms of our algorithm for our overall accuracy, we will use a regression minimizing function, most likely MSE which is a loss function. MSE (mean square error), squares the expected to received value. The metric to measure the MSE will be a ROC (receiver operating characteristic) curve. A ROC curve plots the true positive rate to the false positive rate. These methods allow us to select optimum models.Usability is important for any practical solution, as this is an automated system, we should expect it to work continuously with minimal interference.  
+
+\section{Conclusion}
+In order to make the process of sorting out impurities from grass seed samples more efficient, and accurate, we plan to use a camera and software designed to use a neural net to identify the presence of impurities and signal the need to remove them. This should save seed analysts vast amounts of time, and a lot of physical strain. 
+
+\end{document}
