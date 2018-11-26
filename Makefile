@@ -5,7 +5,7 @@ DVIPDF  = dvipdft
 XDVI	= xdvi -gamma 4
 GH		= gv
 
-EXAMPLES = $(wildcard *.h)
+EXAMPLES = $(wildcard *.c)
 SRC	:= $(shell egrep -l '^[^%]*\\begin\{document\}' *.tex)
 TRG	= $(SRC:%.tex=%.dvi)
 PSF	= $(SRC:%.tex=%.ps)
@@ -18,14 +18,15 @@ ps: $(PSF)
 $(TRG): %.dvi: %.tex $(EXAMPLES)
 	$(LATEX) $<
 #	$(BIBTEX) $(<:%.tex=%)
-	$(LATEX) $<
-	$(LATEX) $<
+#	$(LATEX) $<
+#	$(LATEX) $<
+	#remove the pygmentized output to avoid cluttering up the directory
+
 
 $(PSF):%.ps: %.dvi
 	$(DVIPS) -R -Poutline -t letter $< -o $@
 
 $(PDF): %.pdf: %.ps
-#	$(DVIPDF) -o $@ $<
 	ps2pdf $<
 
 show: $(TRG)
@@ -37,7 +38,7 @@ showps: $(PSF)
 all: pdf
 
 clean:
-	rm -f *.pdf *.ps *.dvi *.out *.log *.aux *.bbl *.blg *.pyg *.toc 
+	rm -Rf *.pdf *.ps *.dvi *.out *.log *.aux *.bbl *.blg *.pyg *.toc _*
 
 .PHONY: all show clean ps pdf showps
 
