@@ -1,9 +1,8 @@
 \subsection{Context}
-The database exists to store the images used by the neural network, including training data, and data collected at runtime for future training and testing. 
-Images will generally be added one at a time during runtime, but during testing and development the capability to add several, potentially hundreds of images per transaction. 
+The database exists to store the images used by the neural network, including training data, and data collected at runtime for future training and testing. Images will generally be added one at a time during runtime, but during testing and development the capability to add several, potentially hundreds of images per transaction.
 
 \subsection{Dependancies} 
-The database will not depend on any other subsystem for opperation.
+The database will not depend on any other subsystem for operation. It is needed for training the neural network computational stick, however, once the neural network is trained the database will be used to store results and review the effectiveness of the system. Thus it will have little impact on the operation of the final device.
 
 \subsection{Structure}
 Making use of SQLite, the database itself will consist of a single file, alongside a folder containing the named image files. 
@@ -60,15 +59,15 @@ query(query);
 \end{minted}
 
 The getImage, and getImages functions are designed to allow easy querying of images iteratively during neural network training. In such cases, we only care that each data point gets used, and filtering results based on type or guess is unlikely to be necessary.
-The addImages function allows the system to add add the seed images collected during runtime to the database.
+The addImages function allows the system to add the seed images collected during runtime to the database.
 The query function allows us to move entrys to different table in order to increase the size of the training or verification data sets. 
 
 \subsection{Interaction}
 
-The database will interact with other subsystems by receiveing and servicing requests to access data in the database. During training, this will be returning entries from the training and verification data sets. At runtime, the system will present images to save via the addimages function. Each iteration, developers will utilize the query function to perform less typical opperations, including migrating runtime data into the training and verification tables.
+The database will interact with other subsystems by receiveing and servicing requests to access data in the database. During training, this will be returning entries from the training and verification data sets. At runtime, the system will present images to save via the addimages function. Each iteration, developers will utilize the query function to perform less typical operations, including migrating runtime data into the training and verification tables.
 
 \subsection{Resources}
 
-The database will require little RAM, but will require its own drive in order to support storing a large number of images. We estimate that drive size will be close to 10 GB, but depending on the size of the training dataset, additional or less memory may be necessary.
+The database will require little RAM, but will require its own drive in order to support storing a large number of images. We estimate that drive size will be close to 10 GB, but depending on the size of the training dataset, the amount of memory needed may change slighly.
 
 
