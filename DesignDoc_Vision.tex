@@ -13,13 +13,13 @@ By making use of OpenCV, the algorithm should be reduced to initial filtering, n
 
 \subsection{Algorithm}
 Filtering will take the initial image and create a boolean array to establish whether each pixel made it through the filter.
+OpenCV supplies a threshold() function which can easily apply such a filter, but testing will be required to identify the exact parameters required to seperate the seeds
+from the background.
 Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
 After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH\_OPEN operation.
-Finally, utilizing OpenCV's distanceTransform() and threshold() functions, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates. With those coordinates we can easily create a smaller image containing a single seed based on the initial image.
-
-
-
-
+w
+Finally, utilizing OpenCV's distanceTransform() function and another filter, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates.
+With those coordinates we can easily create a smaller image containing a single seed based on the initial image.
 
 \subsection{Logical}
 
@@ -41,6 +41,13 @@ into images that the neural network is capable of identifying.
 
 The vision processing subsystem will run on the rasberri pi, 
 and requires no additionaly memory resources.
+
+\subsection{Rational}
+
+It is not feasable for the neural network to classify the entire image at once, so we need a method to seperate each seed, and feed images to the neural network individually. 
+OpenCV provides one of the most usable code libraries for image processing, and was identified as the best technology to use by our team.
+The vision processing algorithm has the potential to be quite complicated, so keeping it seperate from the other systems is important for maintainability.
+ 
 
 
 

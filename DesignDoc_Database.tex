@@ -71,4 +71,11 @@ The database will interact with other subsystems by receiveing and servicing req
 
 The database will require little RAM, but will require its own drive in order to support storing a large number of images. We estimate that drive size will be close to 10 GB, but depending on the size of the training dataset, additional or less memory may be necessary.
 
+\subsection{Rational}
+
+The database is needed to efficiently organize data critical to training the neural network, but our use case is fairly lightweight.
+SQLite provides an incredibly lightweight solution that can be easily used both during training, and during data collection, as well as giving 
+developers the ability to quickly query data during testing and development. 
+Using image pointers as opposed to storing the images makes the database slightly less portable, but should make passing images from subsystem
+to subsystem more efficient.
 

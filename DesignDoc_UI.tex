@@ -1,0 +1,25 @@
+\subsection{Context}
+
+The user interace subsystem needs to be capable of starting and stopping the execution of the entire system, and will be responsible for displaying any error messages that may arrise during execution.
+Because the scope of the interface is fairly minimal, we plan to implement it via the command line.
+
+\subsection{Composition} 
+
+The user interface will operate in its own thread, with the ability to start the main program. 
+The user interface can then wait for further input, and set a flag telling the main thread to stop upon receiving a shutdown command.
+
+\subsection{Interaction and Dependancies}
+
+The user interface will primarily interact with the user, and the remainder of the program as a whole.
+Users will be supplied error messages, and give commands, while the UI starts the system, and sets flags for the
+system to respond to. The user interface will be necessary to start the system, and doesn't
+depend on any of the other subsystems. 
+
+\subsection{Rational}
+
+A command line interface was choosen to minimize the amount of work required to get a functional prototype built.
+Since so little user interaction is necessary, this should have minimal impact on the usability of the system as a whole.
+By keeping user interactions in a seperate thread, we reduce the amount of time 
+the main thread spends checking for input, 
+which allows the system to be more efficient overall. 
+ 
