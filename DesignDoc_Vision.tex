@@ -1,9 +1,10 @@
-\subsection{context}
+
+\subsection{Context}
 
 The goal of the vision processing subsystem is to transform each image received by the camera, and tranform the result into several
 individual images, one for each identified seed, so that the neural net can classify them. 
-This system will be responsible for identifying each seed,
-and creating the image data for each.
+This system will be responsible for identifying each seed present on the received image,
+and creating a smaller image containing just that seed for each of them.
 
 \subsection{Composition} 
 
@@ -14,19 +15,39 @@ By making use of OpenCV, the algorithm should be reduced to initial filtering, n
 Filtering will take the initial image and create a boolean array to establish whether each pixel made it through the filter.
 Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
 After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH_OPEN operation.
-Finally, utilizing OpenCV's distanceTransform() and threshold() functions, we can easily find the coordinates of each seed, and 
-create seperate images for each.
+Finally, utilizing OpenCV's distanceTransform() and threshold() functions, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates. With those coordinates we can easily create a smaller image containing a single seed based on the initial image.
+
+\begin{minted}{python}
+
+
+img = cv.imread('someimage.png')
+gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+ret, thresh = cv.threshold(gray,0,255,cv.THRESH_BINARY_INV+cv.THRESH_OTSU)
+kernel = np.ones((3,3),np.uint8)
+opening = cv.morphologyEx(thresh,cv.MORPH_OPEN,kernel, iterations = 2)
+sure_bg = cv.dilate(opening,kernel,iterations=3)
+dist_transform = cv.distanceTransform(opening,cv.DIST_L2,5)
+ret, sure_fg = cv.threshold(dist_transform,0.7*dist_transform.max(),255,0)
+
+ret, markers = cv.connectedComponents(sure_fg)
+\end{minted}
+
 
 \subsection{Logical}
 
-This subsystem will have a single function facing the remainder of the project. 
+The vision processing subsystem will have a single function facing the remainder of the project. 
 This function will take a single image as a parameter, and return an array containing
 a set of images, each with one of the seeds identified. 
 
 \subsection{Dependancies} 
 
-This subsystem will require image data recieved from the camera subsystem, and is necessary to
-provide images to the neural network.
+The vision processing subsystem will require image data recieved from the camera subsystem.
+
+\subsection{Interactions}
+
+The vision processing subsystem will interact with both the camera, and neural network subsystems. 
+The vision processing system serves as the in between code necessary to translate the image received from the camera
+into images that the neural network is capable of identifying.
 
 \subsection{Resources} 
 
