@@ -1,3 +1,24 @@
 \subsection{Context}
 
-The camera subsystem need to provide raw images to the vision processing subsystem, so that the seeds captured by each image can be identified and classified by other subsystems. This subsytem will make use of 
+The camera subsystem is responisble for capturing images of seeds on the conveyor belt on a timed interval and sending the images to the rasberry pi for image processing. The camera subsystem needs to provide clear and quick images to the vision processing subsystem, so that the seeds captured by each image can be identified and classified by the image processing subsystem. 
+
+\subsection{Composition}
+This subsytem will make use of a camera, usb connector, image control program, and a constant light. The camera needs to take high quality images fast enough to capture 15 or more small grass seeds per second. The image control program will need to send a signal repeatedly with a set interval in order to capture the images at a speed that is effective and useful for our system. The usb connector will be used to send signals and data in and out of both the camera as well as the raspberry pi. These images will then be processed by a different subsystem. The constant light will need to provide a source of light to the conveyor belt so that the images used dont change even with outside sources of light.
+
+\subsection{Structure}
+In order to get high quality images the team decided that a resolution of 1920 x 1080 would be sufficient for high definition quality to determine good and bad seeds. For image speed the camera would need to run more than 10 frames per second and 30 frames per second will allow us to be well above what we need. The camera we decided to use for our project is the Logitech C920 Pro Webcam which is able to take images at 1920x1080 resolution as well as doing so at 30 frames per second. This camera also comes with mounts attached to it and the mount allows the camera lens to look up or down for adjusting. 
+
+The next part of this component is the program that sends a take image signal to the camera and saves the image in a specified way. The program will use a timer to take an image, wait, then take another image, wait, repeat. This will allow for a controlled amount of images sent as well as capturing all the seeds that go by. 
+
+The light that we have will need to be strong enough to reduce the effect of outside light sources that change throughout the day. Since the program could be running at any time, any outside variables need to be removed in order to get consistant and accurate results. The light would need to be mounted above the seeds near or next to the camera in order to reduce shadows. 
+
+\subsection{Logical}
+The connection for this system is the usb cord connecting the raspberry pi with the webcam. The program that controls the system will be sending signals through the usb to the camera. The data with be 
+
+\subsection{Dependencies}
+
+\subsection{Interaction}
+
+\subsection{Algorithm}
+
+\subsection{Resources}
