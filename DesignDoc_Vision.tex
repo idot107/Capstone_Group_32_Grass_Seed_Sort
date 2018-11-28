@@ -2,9 +2,8 @@
 \subsection{Context}
 
 The goal of the vision processing subsystem is to transform each image received by the camera, and tranform the result into several
-individual images, one for each identified seed, so that the neural net can classify them. 
-This system will be responsible for identifying each seed present on the received image,
-and creating a smaller image containing just that seed for each of them.
+individual images, one for each identified seed, so that the neural net can classify each of them. 
+This system will be responsible for both identifying each seed present on the received image, and creating a smaller images containing individual seeds.
 
 \subsection{Composition} 
 
@@ -13,23 +12,20 @@ By making use of OpenCV, the algorithm should be reduced to initial filtering, n
 
 \subsection{Algorithm}
 Filtering will take the initial image and create a boolean array to establish whether each pixel made it through the filter.
-OpenCV supplies a threshold() function which can easily apply such a filter, but testing will be required to identify the exact parameters required to seperate the seeds
-from the background.
-Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
-After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH\_OPEN operation.
-w
-Finally, utilizing OpenCV's distanceTransform() function and another filter, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates.
-With those coordinates we can easily create a smaller image containing a single seed based on the initial image.
+OpenCV supplies a threshold() function which can easily apply such a filter to the images, however testing will be required to identify the exact parameters required to seperate the seeds from other seeds and the background. Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
+
+After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH\_OPEN operation. 
+
+Finally, utilizing OpenCV's distanceTransform() function and another filter, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates. With those coordinates we can create many smaller images containing single seeds based on the initial image.
 
 \subsection{Logical}
 
 The vision processing subsystem will have a single function facing the remainder of the project. 
-This function will take a single image as a parameter, and return an array containing
-a set of images, each with one of the seeds identified. 
+This function will take a single image as a parameter, and return an array containing a set of images, each with one of the seeds identified. 
 
 \subsection{Dependancies} 
 
-The vision processing subsystem will require image data recieved from the camera subsystem.
+The vision processing subsystem will require image data recieved from the camera subsystem. The neural network is dependent on this subsystem because it takes in the individual images and determines good or bad seed based on it.
 
 \subsection{Interactions}
 
@@ -39,8 +35,7 @@ into images that the neural network is capable of identifying.
 
 \subsection{Resources} 
 
-The vision processing subsystem will run on the rasberri pi, 
-and requires no additionaly memory resources.
+The vision processing subsystem will run on the rasberri pi, use processing power to both identify and segment the images, and requires no additionaly memory. 
 
 \subsection{Rational}
 
