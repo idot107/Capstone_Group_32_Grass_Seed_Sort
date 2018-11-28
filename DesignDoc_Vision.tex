@@ -14,23 +14,11 @@ By making use of OpenCV, the algorithm should be reduced to initial filtering, n
 \subsection{Algorithm}
 Filtering will take the initial image and create a boolean array to establish whether each pixel made it through the filter.
 Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
-After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH_OPEN operation.
+After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH\_OPEN operation.
 Finally, utilizing OpenCV's distanceTransform() and threshold() functions, we can ensure each identified block is seperate, and use OpenCV's connectedComponents() function to identify each block and its coordinates. With those coordinates we can easily create a smaller image containing a single seed based on the initial image.
 
-\begin{minted}{python}
 
 
-img = cv.imread('someimage.png')
-gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
-ret, thresh = cv.threshold(gray,0,255,cv.THRESH_BINARY_INV+cv.THRESH_OTSU)
-kernel = np.ones((3,3),np.uint8)
-opening = cv.morphologyEx(thresh,cv.MORPH_OPEN,kernel, iterations = 2)
-sure_bg = cv.dilate(opening,kernel,iterations=3)
-dist_transform = cv.distanceTransform(opening,cv.DIST_L2,5)
-ret, sure_fg = cv.threshold(dist_transform,0.7*dist_transform.max(),255,0)
-
-ret, markers = cv.connectedComponents(sure_fg)
-\end{minted}
 
 
 \subsection{Logical}
