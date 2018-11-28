@@ -43,32 +43,19 @@ While not in use, this foder could be compressed into a tar archive, but would b
 
 The database will be coded to support the following functions:
 
-\begin{minted}{C++}
+\begin{minted}{Python}
 
-struct entry {
-	char* imageAddress;
-	int type; // 0-unknown 1-off-type 2-on-type 
-	int guess;
-};
-/**
-* returns the image address associated with the given the db index.
-*/
-entry getImage(int index, char* table);
+#returns the image address associated with the given the db index.
+entry getImage(index, table);
 
-/**
-* returns the image address' associated with the given index range.
-*/
-entry* getImages(int start, int end, char* table);
+#returns the image addresses associated with the given index range.
+getImages(start, end, table);
 
-/**
-* adds [num] entries to the db.
-*/
-void addImages(entry* files, int num, char* table);
+#adds [num] entries to the db table.
+void addImages(entries, int num, table);
 
-/**
-* performs the given query, and returns an array containing the results.
-*/
-entry* query(char* query);
+#performs the given query, and returns an array containing the results.
+query(query);
 
 \end{minted}
 

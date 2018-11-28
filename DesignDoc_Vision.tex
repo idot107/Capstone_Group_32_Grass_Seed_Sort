@@ -1,0 +1,37 @@
+\subsection{context}
+
+The goal of the vision processing subsystem is to transform each image received by the camera, and tranform the result into several
+individual images, one for each identified seed, so that the neural net can classify them. 
+This system will be responsible for identifying each seed,
+and creating the image data for each.
+
+\subsection{Composition} 
+
+This system will be composed of a single algorithm, making use of the OpenCV image processing library.
+By making use of OpenCV, the algorithm should be reduced to initial filtering, noise removal, and thresholding.
+
+\subsection{Algorithm}
+Filtering will take the initial image and create a boolean array to establish whether each pixel made it through the filter.
+Since the background will be quite consistant, this filter should be easy to create, but will be more formally established during testing.
+After filtering we remove noise removal, which can be accomplished easily using the openCV morphologyEx() MORPH_OPEN operation.
+Finally, utilizing OpenCV's distanceTransform() and threshold() functions, we can easily find the coordinates of each seed, and 
+create seperate images for each.
+
+\subsection{Logical}
+
+This subsystem will have a single function facing the remainder of the project. 
+This function will take a single image as a parameter, and return an array containing
+a set of images, each with one of the seeds identified. 
+
+\subsection{Dependancies} 
+
+This subsystem will require image data recieved from the camera subsystem, and is necessary to
+provide images to the neural network.
+
+\subsection{Resources} 
+
+The vision processing subsystem will run on the rasberri pi, 
+and requires no additionaly memory resources.
+
+
+
