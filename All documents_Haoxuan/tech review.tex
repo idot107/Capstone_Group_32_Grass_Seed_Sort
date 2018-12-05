@@ -1,0 +1,155 @@
+\documentclass[onecolumn, draftclsnofoot,10pt, compsoc]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{geometry}
+\geometry{textheight=9.5in, textwidth=7in}
+ % 1. Fill in these details
+\def \CapstoneTeamName{		The Seed Team}
+\def \CapstoneTeamNumber{		32}
+\def \GroupMemberOne{			Bharath Padmaraju}
+\def \GroupMemberTwo{			Kevin Deming}
+\def \GroupMemberFive{			Haoxuan Zhang}
+\def \GroupMemberFour{			Cong Yang}
+\def \GroupMemberThree{			Christopher Wohlwend}
+\def \CapstoneProjectName{		Pure Grass Seed Sorter}
+\def \CapstoneSponsorCompany{	Oregon State University Seed Lab}
+\def \CapstoneSponsorPerson{		Dan Curry}
+ % 2. Uncomment the appropriate line below so that the document type works
+\def \DocType{	%	Requirement Document
+				%Requirements Document
+				Technology Review
+				%Design Document
+				%Progress Report
+				}
+			
+\newcommand{\NameSigPair}[1]{\par
+\makebox[2.75in][r]{#1} \hfil 	\makebox[3.25in]{\makebox[2.25in]{\hrulefill} \hfill		\makebox[.75in]{\hrulefill}}
+\par\vspace{-12pt} \textit{\tiny\noindent
+\makebox[2.75in]{} \hfil		\makebox[3.25in]{\makebox[2.25in][r]{Signature} \hfill	\makebox[.75in][r]{Date}}}}
+% 3. If the document is not to be signed, uncomment the RENEWcommand below
+\renewcommand{\NameSigPair}[1]{#1}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+    \pagenumbering{gobble}
+    \begin{singlespace}
+    	%\includegraphics[height=4cm]{coe_v_spot1}
+        \hfill 
+        % 4. If you have a logo, use this includegraphics command to put it on the coversheet.
+        \par\vspace{.2in}
+        \centering
+        \scshape{
+            \huge CS Capstone \DocType \par
+            {\large\today}\par
+            \vspace{.5in}
+            \textbf{\Huge\CapstoneProjectName}\par
+            \vfill
+            {\large Prepared for}\par
+            \Huge \CapstoneSponsorCompany\par
+            \vspace{5pt}
+            {\Large\NameSigPair{\CapstoneSponsorPerson}\par}
+            {\large Prepared by }\par
+            Group\CapstoneTeamNumber\par
+            % 5. comment out the line below this one if you do not wish to name your team
+            \CapstoneTeamName\par 
+            \vspace{5pt}
+            {\Large
+            %    \NameSigPair{\GroupMemberOne}\par
+            %    \NameSigPair{\GroupMemberTwo}\par
+            %    \NameSigPair{\GroupMemberThree}\par
+            %    \NameSigPair{\GroupMemberFour}\par
+                \NameSigPair{\GroupMemberFive}\par
+            }
+            \vspace{20pt}
+        }
+
+    \end{singlespace}
+\end{titlepage}
+\newpage
+\pagenumbering{arabic}
+\tableofcontents
+% 7. uncomment this (if applicable). Consider adding a page break.
+%\listoffigures
+%\listoftables
+\clearpage
+
+\section{Introduction}
+The seed team is consisted by 5 members, I am the software engineer in the team. For workers engaged in the seed lab, they have high requirements for high purity seeds because the purity of seeds can reduce unnecessary waste on the hybrids. This results in higher yields of crops that can be picked. In general, there is a dedicated staff sitting in front of the microscope to observe the seeds that are continuously being transported through the conveyor belt. They use their expertise in knowledge of seeds to manually pick apart the seeds. This amount of work is enormous for these workers, and the value made this way is not proportional to the time they spend on. Therefore, it is necessary to develop a machine to do the job instead of human. From the client’s requirements for the product, the machine needs to complete the screening of 25,000 seeds in 30 minutes and the purity of target seed must be above 99.9 percentage, which requires the program to be efficient in identifying off-type seeds. When the machine identifies the off-type seed, it should be able to locate the bad seed, and the bad seed will be picked up manually in either a bunch or by itself. This document will give a brief overview of the overall idea of the entire project and the technologies that may be used. The document will describe the principle and composition of the application program and the connection process between the program and the machine. 
+\pagebreak
+
+\section{Neural Network}
+\par
+The specific structure of the human brain and eyes enable us to distinguish the things we see quickly. It is hard to make a software program to do the same thing by just using traditional programming methods. Neural networks solve this obstacle differently. The method is to let the system through a training process with a large amount of experimental data to teach the neural network how to identify the target object. A critical component of the neural network is called perceptron. The perceptron absorbs multiple inputs and generates the result. For a perceptron, every input has a weight(threshold) that can represent the importance of that input to the output, and the perceptron can base on the weight to determine what the result will be. We can set different weights for input, then the decision-making models of perceptron will be different. What we just introduced is how a single perceptron works. If we connect multiple perceptrons, they will build a complex network of perceptron's that can make subtle decisions.  Each perceptron of the neural network only has one output, but the result is used as an input for many of other perceptrons. The weight or we can called it threshold condition judging is too heavy for the neural network system to do calculation; it will be better to use bias to simplify the notation of the condition. [1]
+\par
+Six types of artificial neural networks that being used in machine learning currently: radial basis functions neural networks, feedforward neural networks, recurrent neural networks, convolutional neural networks, Kohonen self-organizing neural networks and modular neural networks. The neural network we introduced above is called feedforward neural network – artificial neuron, and we will use this specific neural network in our computer vision grass seed sorter project to identify seeds.  [4]
+\par
+The neural network system requires clear and informative data to train.  We also need to initialize our weights randomly. There is a function called loss-function that is used to determine how good our neural network performs in a particular task. In the process of training, we start with a lousy performing neural network and end up with high accuracy. We keep adjusting weights to find a better performance than the initial one, so long as we have enough labeled examples for the network to learn from.  [3]
+\par
+We need to pick a framework to implement our neural network. The advantage of using a framework to create a neural network is that it can perform better and make neural network understandable and maintainable for others. Many choices are free online, such as Chainer, Gluon, Tensorflow, and PyTorch. The tool we decided to use to implement the neural network is called TensorFlow.
+\par
+From the introduction of TensorFlow application, "TensorFlow is an open source software library for numerical computation using data flow graphs. Nodes in the graph represent mathematical operations, while graph edges represent multi-dimensional data arrays (aka tensors) communicated between them. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API." After we install TensorFlow in our system, we can use it to make a neural network model.   
+\pagebreak
+
+\section{Snapshot}
+\par
+In our project, we need a high-resolution camera head to take pictures of the seeds on the running conveyor and transfer them to the computer in real time to let neural network identify if there is any bad seed. By following the requirements of the project, there will be 25000 seeds pass through in 30 minutes, which means the speed of seed passing is 14 seeds/second. Since the neural network needs details in images to identify seeds, our camera head should be able to take one clear and informative image per second.
+\par
+DS-Ri2 is a high-definition color camera head.  It can provide fast, the capture of ultra-high-resolution color images. The DS-Ri2 can provide perfect color reproduction. It can generate flawless color reproduction to achieve the same effect as the human eye sees in the microscope. The DS-Ri2 has the high level of sensitivity but without high noise, the settings of sensitivity spread the field from ISO200 to ISO12800, and this enables DS-Ri2 to capture bright fluorescent color images. [6] The standard way to import images from high-resolution camera head to our computer that connects the camera head to our computer with the camera head's USB cable. [5]
+\par
+The DS-Fi3 has almost the same function as DE-Ri2, but it allows connection directly to a computer by using a USB3.0 interface and take over the camera to capture images using the NIS-Elements imaging software. The DE-Fi3 also has high quantum efficiency, which can provide an optimal observation of imaging in different and make it able to catch many seeds easily. After users click import on the computer, the images will start to import to the computer. [7]
+\par
+There is a smart camera that equips on cars and machines; it has real-time image capability. The camera is intelligent, and they can understand and interact pictures and videos and respond to these images and videos with actions. From an online source, we known " " recognition" intelligence allows smart cameras to "learn" faces or objects, often through a user supplying his or her data to "train" the system. Based on a database of "learned" faces, the latest artificial intelligence, or deep learning, the software can then recognize a detected individual as a son, daughter, or spouse." We can use this kind of smart camera to detect seeds or even off-type seed in our project after we use our database of seed to train the smart camera to its ability to recognize seeds. [4]
+\par
+Our neural network needs to read images from the database, so we need to save our images in SQL server database using C. From an online source, we have known "SQL is a special-purpose programming language designed to handle data in a relational database management system. A database server is a computer program that provides database services to other programs or computers, as defined by the client-server model. " [8]
+\pagebreak
+
+\section{LED light}
+\par
+The purpose of our project is to identify and locate the off-type seed from the test sample. When the neural network discriminates the off-type seed, a LED light will turn on which indicates worker to come and pick up the bad seed. The computer will control the LED light after the neural network identified the off-type seed, the computer will send an electronic signal to turn the LED light on. There are two sections we need to do to complete the mission, which is the hardware section and software section. 
+\par
+For hardware section, a list of components we need to prepare is power supply, relay module, breadboard, Arduino(nano) or any other Arduino, and connecting wires. The Arduino Nano is a compact board. To be more specific, from a online definition, an Arduino is “an open-source electronics platform based on easy-to-use hardware and software.” [12]  The online definition of relay is that "The relay is an electrically operated switch of the main voltage. It means that it can be turned on or off, letting the current go through or not. Controlling a relay with the Arduino is as simple as controlling an output such as LED." [11] From online definition, a breadboard “is a construction base for prototyping of electronics." [13] We will use the power supply to charge the electricity of relay module. To start up the relay module, we need to connect each digital pin of Arduino to the input pin of the relay module. After Arduino is charged, we need to connect the Arduino to ground power supply. The hardware is complete so far. For the software section, we need to use Arduino's code and GUI by using processing software. Arduino's code is merely a set of C/C++ functions that can be called from our code. GUI is a graphical user interface that allows users to interact with electronic devices. The Arduino will receive data from USB and operate the relay module by following the instruction that decrypt from data. The processing IDE is like Arduino IDE. According to from online source, "Arduino library was imported in processing, and a rectangle was drawn using rect function, whenever the mouse is pressed in that rectangular area, a serial data is sent to Arduino, which in result turn on or off the relay.” [9]
+\par
+There is another way to do it. Instead of connecting Arduino Nano, relay module, and power supply as our hardware, we can choose to use a controller, which connects to the computer; and a dimmer switch. The controller will send commands through power lines and get to the switch. The Insteon PowerLinc Controller can be one of our choices. It works on Windows and Mac. In order to send commands to the controller(PowerLinc), we need to install an app called SmartHome Device Manager. We also need to install SDM Socket Server, which can allow us to connect to TCP/IP. From the online source, "The Insteon SmartHome Device Manager(SDM) provides a bi-directional TCP network socket interface to the Insteon SmartHome Device Manager allowing client applications to listen for events and use simple text commands to control X10 and Insteon enabled household devices for home automation." [14] The language we use here is Python. Through Python script, we can connect to the SDM socket server and send messages to the controller. Then we can control the ON/OFF of the light. [10]
+\pagebreak
+
+\section{Conclusion}
+In order to make the process of sorting out impurities from grass seed samples more efficient, and accurate, we plan to use a camera and software designed to use a neural network to identify the presence of impurities and signal the need to remove them. This should save seed analysts vast amounts of time, and a lot of physical strain.
+\pagebreak
+
+
+\begin{thebibliography}{15}
+\bibitem{online}
+Nielsen Michael (1970, Januray 01). Neural Networks and Deep learning. Retrieved from: http://neuralnetworksanddeeplearning.com/chap1.html
+\bibitem{online}
+Faizan.S (2018, April 04). An Introduction to Implementing Neural Networks using TensorFlow. Retrieved from: https://www.analyticsvidhya.com/blog/2016/10/an-introduction-to-implementing-neural-networks-using-tensorflow/
+\bibitem{online}
+November 27, 2017. How do we 'train' neural networks?-Towards Data Science. Retrieved from: https://towardsdatascience.com/how-do-we-train-neural-networks-edd985562b73
+\bibitem{online}
+Analytics India Magazine (2018, August 31).6 Types of Artificial Neural Networks Currently Being Used in ML. Retrieved from: https://www.analyticsindiamag.com/6-types-of-artificial-neural-networks-currently-being-used-in-todays-technology/
+\bibitem{online}
+Techbriefs Media Group (2016, September 2016). Smart Cameras Get Smarter. Retrieved from: https://www.techbriefs.com/component/content/article/tb/features/articles/25419
+\bibitem{online}
+Microsoft Support(2018, November 03). Retrieved from: https://support.microsoft.com/en-gb/help/17449/windows-7-import-pictures
+\bibitem{online}
+Microscopes and Imaging Systems (2018, November 03). DS-Ri2|Camera Heads|Cameras|Products|Nikon Instruments. Retrieved from: https://www.nikoninstruments.com/Products/Cameras/Camera-Heads/DS-Ri2
+\bibitem{online}
+Microscopes and Imaging Systems (2018, November 03). DS-Ri2|Camera Heads|Cameras|Products|Nikon Instruments. Retrieved from: https://www.nikoninstruments.com/Products/Cameras/Camera-Heads/DS-Fi3
+\bibitem{online}
+Computer Business Review (2017, February 16). What is SQL Server. Retrieved from: https://www.cbronline.com/what-is/what-is-sql-server-4914415/
+\bibitem{online}
+Instructable.com (2017, November 11). Control Lights in Your House With Your Computer. Retrieve from: https://www.instructables.com/id/Control-lights-in-your-house-with-your-computer/
+\bibitem{online}
+Instructable.com (2017, July 06). Control Your Room Lights Using Your Computer. Retrieve from: https://www.instructables.com/id/Control-Your-Room-Lights-Using-Your-Computer/
+\bibitem{online}
+Random Nerd Turorials (2018, November 03). Guide for Relay Module with Arduino. Retrieved from: https://randomnerdtutorials.com/guide-for-relay-module-with-arduino/
+\bibitem{online}
+Arduino-Introduction (2018, November 03). Retrieve from: https://www.arduino.cc/en/Guide/Introduction
+\bibitem{online}
+Wikipedia (2018, October 10). Breadboard. Retrieve from:
+https://en.wikipedia.org/wiki/Breadboard
+\bibitem{online}
+CodePlex Archive(2018, November 08). CodePlex Archive. Retrieve from: https://archive.codeplex.com/?p=sdmsocketserver
+\end{thebibliography}
+
+\end{document}
