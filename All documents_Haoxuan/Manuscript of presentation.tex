@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Manuscript of presentation}
+\author{zhanhaox }
+
+\begin{document}
+
+\maketitle
+
+\section{The purpose}
+For workers who engaged in agriculture, they have restricted requirements that ask for high purity seeds. Because the high-purity seeds will reduce unnecessary waste on the hybrids, higher yields can be picked regarding planting. 
+In general, there is a dedicated staff sitting in front of the microscope to observe the seeds that are continuously being transported from the conveyor belt. They use their expert knowledge of seeds to pick up the seeds manually. This amount of work is enormous for these workers, and the value made in this way are not proportional to the time they spend on.
+Therefore, it is necessary to develop a program that can automatically identify the off-type seed instead of human. 
+
+\section{The goal}
+The group of seeds that need to be sorted is enormous in the agricultural field, and the number of off-type seed is small in the group. From the client’s requirements for the product, the computer needs to complete the discrimination of 25000 seeds in 30 minutes, and the purity of target seed must be above 99.9 percentage, which requires the program and algorithm to be efficient in identifying off-type seeds. The 25000 seed test sample will have less debris in it. And there will be 5 or 10 or 25 or up to 50 seeds that are off-types. So, the off-type seed will only be a very small percentage out of the total amount of seeds. That’s why so we the accuracy of target seed to be 99.9 percentage. The deviation will allow 125 seeds maximum go into the pure seed that is off-type seed. The test seed will be carried by conveyor belt, and the camera takes a picture of the seed, and the algorithm will process the image to identify if there is any off type-seed. When the machine detects the off-type seed, it should be able to locate the bad seed, and the bad seed will be picked up manually, or it will be removed by a mechanical arm that will be completed by another EECS team. The belt will use vibration to avoid overlapping of the seeds. The camera needs high resolution to ensure to take clear seed image on a vibrating conveyor belt. The conveyor belt better is scaled to facilitate segmentation of the seeds. The camera will only need to make one shot per segmentation. 
+\section{To sum up}
+To sum up, the primary mission of the project is to build a software that can automatically discriminate between pure grass seeds from all other plant seeds but not limited to weeds and crop seeds. 
+Our goal is to ensure the machine can complete sorting of 25000 seeds in 30 minutes when the computer identifies the off-type seed, and it should able to local the off-type seed.  Our team only need to make the program to identify off-type seeds and locate them, and other teams will work on how to remove the located or identified off-type seed.  After the sorting process complete, the purity target-seed, in the end, should reach 99.9%.
+
+\end{document}
